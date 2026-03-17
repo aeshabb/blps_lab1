@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Skillbox_Final" targetNamespace="http://example.com/bpmn/skillbox/final" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.1">
+  <bpmn:message id="Message_RequestPage" name="Запрос страницы программы" />
+  <bpmn:message id="Message_ProgramData" name="Данные программы и тарифов" />
+  <bpmn:message id="Message_Application" name="Заявка на обучение" />
+  <bpmn:message id="Message_PaymentLink" name="Ссылка на оплату" />
+  <bpmn:message id="Message_PaymentRequest" name="Платежный запрос" />
+  <bpmn:message id="Message_PaymentSuccess" name="Подтверждение оплаты" />
+  <bpmn:message id="Message_PaymentFail" name="Отказ оплаты" />
+  <bpmn:message id="Message_EnrollRequest" name="Запрос на зачисление" />
+  <bpmn:message id="Message_EnrollConfirm" name="Подтверждение зачисления" />
+  <bpmn:message id="Message_AccessData" name="Данные доступа" />
+  <bpmn:message id="Message_Refusal" name="Уведомление об отказе" />
+  <bpmn:dataStore id="DataStore_Programs" name="БД программ" />
+  <bpmn:dataStore id="DataStore_Tariffs" name="БД тарифов" />
+  <bpmn:dataStore id="DataStore_Applications" name="БД заявок и заказов" />
+  <bpmn:dataStore id="DataStore_Payments" name="БД оплат" />
+  <bpmn:dataStore id="DataStore_OE_Users" name="БД пользователей Open edX" />
+  <bpmn:dataStore id="DataStore_OE_Enrollments" name="БД зачислений Open edX" />
+  <bpmn:collaboration id="Collaboration_SkillboxEnrollment">
+    <bpmn:participant id="Participant_User" name="Пользователь" processRef="Process_User" />
+    <bpmn:participant id="Participant_Skillbox" name="Skillbox" processRef="Process_Skillbox" />
+    <bpmn:participant id="Participant_Bank" name="Платежный сервис / Банк" processRef="Process_Bank" />
+    <bpmn:participant id="Participant_OpenEdX" name="Open edX" processRef="Process_OpenEdX" />
+    <bpmn:messageFlow id="MessageFlow_RequestPage" name="Запрос страницы" sourceRef="UserTask_RequestPage" targetRef="Skillbox_LoadPrograms" />
+    <bpmn:messageFlow id="MessageFlow_ProgramData" name="Данные программы и тарифов" sourceRef="Skillbox_SendProgramData" targetRef="UserTask_ReceiveProgramData" />
+    <bpmn:messageFlow id="MessageFlow_Application" name="Заявка" sourceRef="UserTask_SendApplication" targetRef="Skillbox_ReceiveApplication" />
+    <bpmn:messageFlow id="MessageFlow_PaymentLink" name="Ссылка на оплату" sourceRef="Skillbox_SendPaymentLink" targetRef="UserTask_ReceivePaymentLink" />
+    <bpmn:messageFlow id="MessageFlow_PaymentRequest" name="Платежный запрос" sourceRef="UserTask_PayProgram" targetRef="Start_Bank_PaymentRequest" />
+    <bpmn:messageFlow id="MessageFlow_PaymentSuccess" name="Статус оплаты: успех" sourceRef="Bank_SendSuccess" targetRef="Skillbox_CatchPaymentSuccess" />
+    <bpmn:messageFlow id="MessageFlow_PaymentFail" name="Статус оплаты: отказ" sourceRef="Bank_SendFail" targetRef="Skillbox_CatchPaymentFail" />
+    <bpmn:messageFlow id="MessageFlow_EnrollRequest" name="Запрос на зачисление" sourceRef="Skillbox_SendOpenEdXRequest" targetRef="Start_OpenEdX_Request" />
+    <bpmn:messageFlow id="MessageFlow_EnrollConfirm" name="Подтверждение зачисления" sourceRef="OpenEdX_SendConfirmation" targetRef="Skillbox_CatchOpenEdXConfirmation" />
+    <bpmn:messageFlow id="MessageFlow_AccessData" name="Данные доступа" sourceRef="UserTask_ReceiveAccess" targetRef="Skillbox_SendAccessData" />
+    <bpmn:messageFlow id="MessageFlow_Refusal" name="Уведомление об отказе" sourceRef="End_User_Fail" targetRef="Skillbox_SendOpenEdXRequest" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_User" isExecutable="false">
+    <bpmn:startEvent id="Start_User" name="Интерес к программе" />
+    <bpmn:userTask id="UserTask_RequestPage" name="Запросить страницу программы" />
+    <bpmn:receiveTask id="UserTask_ReceiveProgramData" name="Получить программу и тарифы" messageRef="Message_ProgramData" />
+    <bpmn:userTask id="UserTask_ChooseTariff" name="Выбрать программу и тариф" />
+    <bpmn:userTask id="UserTask_FillApplication" name="Заполнить заявку" />
+    <bpmn:sendTask id="UserTask_SendApplication" name="Отправить заявку" messageRef="Message_Application" />
+    <bpmn:receiveTask id="UserTask_ReceivePaymentLink" name="Получить ссылку на оплату" messageRef="Message_PaymentLink" />
+    <bpmn:eventBasedGateway id="UserGateway_WaitResult" name="Ожидать ответ по доступу" />
+    <bpmn:receiveTask id="UserTask_ReceiveAccess" name="Получить подтверждение доступа" messageRef="Message_AccessData" />
+    <bpmn:receiveTask id="UserTask_ReceiveRefusal" name="Получить отказ от Open edX" messageRef="Message_Refusal" />
+    <bpmn:endEvent id="End_User_Success" name="Запись завершена" />
+    <bpmn:endEvent id="End_User_Fail" name="Запись не завершена" />
+    <bpmn:userTask id="UserTask_PayProgram" name="Оплатить программу" />
+    <bpmn:sequenceFlow id="UF1" sourceRef="Start_User" targetRef="UserTask_RequestPage" />
+    <bpmn:sequenceFlow id="UF2" sourceRef="UserTask_RequestPage" targetRef="UserTask_ReceiveProgramData" />
+    <bpmn:sequenceFlow id="UF3" sourceRef="UserTask_ReceiveProgramData" targetRef="UserTask_ChooseTariff" />
+    <bpmn:sequenceFlow id="UF4" sourceRef="UserTask_ChooseTariff" targetRef="UserTask_FillApplication" />
+    <bpmn:sequenceFlow id="UF5" sourceRef="UserTask_FillApplication" targetRef="UserTask_SendApplication" />
+    <bpmn:sequenceFlow id="UF6" sourceRef="UserTask_SendApplication" targetRef="UserTask_ReceivePaymentLink" />
+    <bpmn:sequenceFlow id="UF7" sourceRef="UserTask_ReceivePaymentLink" targetRef="UserTask_PayProgram" />
+    <bpmn:sequenceFlow id="UF8" sourceRef="UserTask_PayProgram" targetRef="UserGateway_WaitResult" />
+    <bpmn:sequenceFlow id="UF9" sourceRef="UserGateway_WaitResult" targetRef="UserTask_ReceiveAccess" />
+    <bpmn:sequenceFlow id="UF10" sourceRef="UserGateway_WaitResult" targetRef="UserTask_ReceiveRefusal" />
+    <bpmn:sequenceFlow id="UF11" sourceRef="UserTask_ReceiveAccess" targetRef="End_User_Success" />
+    <bpmn:sequenceFlow id="UF12" sourceRef="UserTask_ReceiveRefusal" targetRef="End_User_Fail" />
+  </bpmn:process>
+  <bpmn:process id="Process_Skillbox" isExecutable="false">
+    <bpmn:startEvent id="Start_Skillbox_Request" name="Получен запрос страницы">
+      <bpmn:messageEventDefinition messageRef="Message_RequestPage" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Skillbox_LoadPrograms" name="Загрузить программы из БД" />
+    <bpmn:serviceTask id="Skillbox_LoadTariffs" name="Загрузить тарифы из БД" />
+    <bpmn:sendTask id="Skillbox_SendProgramData" name="Показать программу и тарифы" messageRef="Message_ProgramData" />
+    <bpmn:receiveTask id="Skillbox_ReceiveApplication" name="Получить заявку" messageRef="Message_Application" />
+    <bpmn:serviceTask id="Skillbox_ValidateSaveApplication" name="Проверить и сохранить заявку" />
+    <bpmn:serviceTask id="Skillbox_GeneratePaymentLink" name="Сформировать ссылку на оплату" />
+    <bpmn:sendTask id="Skillbox_SendPaymentLink" name="Отправить ссылку на оплату" messageRef="Message_PaymentLink" />
+    <bpmn:eventBasedGateway id="Skillbox_Gateway_WaitPayment" name="Ожидать статус оплаты" />
+    <bpmn:intermediateCatchEvent id="Skillbox_CatchPaymentFail" name="Получен отказ оплаты">
+      <bpmn:messageEventDefinition messageRef="Message_PaymentFail" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sendTask id="Skillbox_SendOpenEdXRequest" name="Передать данные в Open edX" messageRef="Message_EnrollRequest" />
+    <bpmn:intermediateCatchEvent id="Skillbox_CatchOpenEdXConfirmation" name="Получено подтверждение Open edX">
+      <bpmn:messageEventDefinition messageRef="Message_EnrollConfirm" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:serviceTask id="Skillbox_SaveAccessData" name="Сохранить доступ и зачисление" />
+    <bpmn:sendTask id="Skillbox_SendAccessData" name="Отправить данные доступа" messageRef="Message_AccessData" />
+    <bpmn:endEvent id="End_Skillbox_Success" name="Пользователь зачислен" />
+    <bpmn:serviceTask id="Skillbox_FixPaymentFail" name="Зафиксировать отказ оплаты" />
+    <bpmn:dataStoreReference id="DataStoreRef_Applications" name="заявки" dataStoreRef="DataStore_Applications" />
+    <bpmn:dataStoreReference id="DataStoreRef_Programs" name="образовательные  программ" dataStoreRef="DataStore_Programs" />
+    <bpmn:dataStoreReference id="DataStoreRef_Tariffs" name="тарифы" dataStoreRef="DataStore_Tariffs" />
+    <bpmn:serviceTask id="Skillbox_FixPaymentSuccess" name="Зафиксировать оплату в БД" />
+    <bpmn:intermediateCatchEvent id="Skillbox_CatchPaymentSuccess" name="Получен успех оплаты">
+      <bpmn:messageEventDefinition messageRef="Message_PaymentSuccess" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:dataStoreReference id="DataStoreRef_Payments" name="транзакции оплаты" dataStoreRef="DataStore_Payments" />
+    <bpmn:sendTask id="Skillbox_SendRefusal" name="Отправить уведомление об отказе" messageRef="Message_Refusal" />
+    <bpmn:endEvent id="End_Skillbox_Fail" name="Запись отменена" />
+    <bpmn:sequenceFlow id="SF1" sourceRef="Start_Skillbox_Request" targetRef="Skillbox_LoadPrograms" />
+    <bpmn:sequenceFlow id="SF2" sourceRef="Skillbox_LoadPrograms" targetRef="Skillbox_LoadTariffs" />
+    <bpmn:sequenceFlow id="SF3" sourceRef="Skillbox_LoadTariffs" targetRef="Skillbox_SendProgramData" />
+    <bpmn:sequenceFlow id="SF4" sourceRef="Skillbox_SendProgramData" targetRef="Skillbox_ReceiveApplication" />
+    <bpmn:sequenceFlow id="SF5" sourceRef="Skillbox_ReceiveApplication" targetRef="Skillbox_ValidateSaveApplication" />
+    <bpmn:sequenceFlow id="SF6" sourceRef="Skillbox_ValidateSaveApplication" targetRef="Skillbox_GeneratePaymentLink" />
+    <bpmn:sequenceFlow id="SF7" sourceRef="Skillbox_GeneratePaymentLink" targetRef="Skillbox_SendPaymentLink" />
+    <bpmn:sequenceFlow id="SF8" sourceRef="Skillbox_SendPaymentLink" targetRef="Skillbox_Gateway_WaitPayment" />
+    <bpmn:sequenceFlow id="SF9" sourceRef="Skillbox_Gateway_WaitPayment" targetRef="Skillbox_CatchPaymentSuccess" />
+    <bpmn:sequenceFlow id="SF10" sourceRef="Skillbox_Gateway_WaitPayment" targetRef="Skillbox_CatchPaymentFail" />
+    <bpmn:sequenceFlow id="SF17" sourceRef="Skillbox_CatchPaymentFail" targetRef="Skillbox_FixPaymentFail" />
+    <bpmn:sequenceFlow id="SF12" sourceRef="Skillbox_FixPaymentSuccess" targetRef="Skillbox_SendOpenEdXRequest" />
+    <bpmn:sequenceFlow id="SF13" sourceRef="Skillbox_SendOpenEdXRequest" targetRef="Skillbox_CatchOpenEdXConfirmation" />
+    <bpmn:sequenceFlow id="SF14" sourceRef="Skillbox_CatchOpenEdXConfirmation" targetRef="Skillbox_SaveAccessData" />
+    <bpmn:sequenceFlow id="SF15" sourceRef="Skillbox_SaveAccessData" targetRef="Skillbox_SendAccessData" />
+    <bpmn:sequenceFlow id="SF16" sourceRef="Skillbox_SendAccessData" targetRef="End_Skillbox_Success" />
+    <bpmn:sequenceFlow id="SF18" sourceRef="Skillbox_FixPaymentFail" targetRef="Skillbox_SendRefusal" />
+    <bpmn:sequenceFlow id="SF11" sourceRef="Skillbox_CatchPaymentSuccess" targetRef="Skillbox_FixPaymentSuccess" />
+    <bpmn:sequenceFlow id="SF19" sourceRef="Skillbox_SendRefusal" targetRef="End_Skillbox_Fail" />
+    <bpmn:association id="Assoc_Programs" sourceRef="Skillbox_LoadPrograms" targetRef="DataStoreRef_Programs" />
+    <bpmn:association id="Assoc_Tariffs" sourceRef="Skillbox_LoadTariffs" targetRef="DataStoreRef_Tariffs" />
+    <bpmn:association id="Assoc_Applications" sourceRef="Skillbox_ValidateSaveApplication" targetRef="DataStoreRef_Applications" />
+    <bpmn:association id="Assoc_PayFail" sourceRef="Skillbox_FixPaymentFail" targetRef="DataStoreRef_Payments" />
+    <bpmn:association id="Assoc_PaySuccess" sourceRef="Skillbox_FixPaymentSuccess" targetRef="DataStoreRef_Payments" />
+  </bpmn:process>
+  <bpmn:process id="Process_Bank" isExecutable="false">
+    <bpmn:startEvent id="Start_Bank_PaymentRequest" name="Получен платежный запрос">
+      <bpmn:messageEventDefinition messageRef="Message_PaymentRequest" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Bank_ProcessPayment" name="Обработать платеж" />
+    <bpmn:exclusiveGateway id="Bank_Gateway_Success" name="Оплата успешна?" />
+    <bpmn:sendTask id="Bank_SendSuccess" name="Отправить подтверждение оплаты" messageRef="Message_PaymentSuccess" />
+    <bpmn:sendTask id="Bank_SendFail" name="Отправить отказ оплаты" messageRef="Message_PaymentFail" />
+    <bpmn:endEvent id="End_Bank_Success" name="Успех" />
+    <bpmn:endEvent id="End_Bank_Fail" name="Отказ" />
+    <bpmn:sequenceFlow id="BF1" sourceRef="Start_Bank_PaymentRequest" targetRef="Bank_ProcessPayment" />
+    <bpmn:sequenceFlow id="BF2" sourceRef="Bank_ProcessPayment" targetRef="Bank_Gateway_Success" />
+    <bpmn:sequenceFlow id="BF3" name="Да" sourceRef="Bank_Gateway_Success" targetRef="Bank_SendSuccess" />
+    <bpmn:sequenceFlow id="BF4" name="Нет" sourceRef="Bank_Gateway_Success" targetRef="Bank_SendFail" />
+    <bpmn:sequenceFlow id="BF5" sourceRef="Bank_SendSuccess" targetRef="End_Bank_Success" />
+    <bpmn:sequenceFlow id="BF6" sourceRef="Bank_SendFail" targetRef="End_Bank_Fail" />
+  </bpmn:process>
+  <bpmn:process id="Process_OpenEdX" isExecutable="false">
+    <bpmn:startEvent id="Start_OpenEdX_Request" name="Получен запрос на зачисление">
+      <bpmn:messageEventDefinition messageRef="Message_EnrollRequest" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="OpenEdX_CheckUser" name="Проверить пользователя в Open edX" />
+    <bpmn:exclusiveGateway id="OpenEdX_Gateway_UserExists" name="Пользователь существует?" />
+    <bpmn:serviceTask id="OpenEdX_CreateAccount" name="Создать аккаунт">
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0ujna9e">
+        <bpmn:targetRef>DataStoreRef_OE_Users</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="OpenEdX_Enroll" name="Зачислить на программу">
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0bajukf">
+        <bpmn:targetRef>DataStoreRef_OE_Enrollments</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="OpenEdX_OpenAccess" name="Открыть доступ к курсам" />
+    <bpmn:sendTask id="OpenEdX_SendConfirmation" name="Отправить подтверждение" messageRef="Message_EnrollConfirm" />
+    <bpmn:endEvent id="End_OpenEdX" name="Зачисление завершено" />
+    <bpmn:dataStoreReference id="DataStoreRef_OE_Users" name="пользователи Open edX" dataStoreRef="DataStore_OE_Users" />
+    <bpmn:dataStoreReference id="DataStoreRef_OE_Enrollments" name="транзакции зачислений Open edX" dataStoreRef="DataStore_OE_Enrollments" />
+    <bpmn:sequenceFlow id="OF1" sourceRef="Start_OpenEdX_Request" targetRef="OpenEdX_CheckUser" />
+    <bpmn:sequenceFlow id="OF2" sourceRef="OpenEdX_CheckUser" targetRef="OpenEdX_Gateway_UserExists" />
+    <bpmn:sequenceFlow id="OF3" name="Да" sourceRef="OpenEdX_Gateway_UserExists" targetRef="OpenEdX_Enroll" />
+    <bpmn:sequenceFlow id="OF4" name="Нет" sourceRef="OpenEdX_Gateway_UserExists" targetRef="OpenEdX_CreateAccount" />
+    <bpmn:sequenceFlow id="OF5" sourceRef="OpenEdX_CreateAccount" targetRef="OpenEdX_Enroll" />
+    <bpmn:sequenceFlow id="OF6" sourceRef="OpenEdX_Enroll" targetRef="OpenEdX_OpenAccess" />
+    <bpmn:sequenceFlow id="OF7" sourceRef="OpenEdX_OpenAccess" targetRef="OpenEdX_SendConfirmation" />
+    <bpmn:sequenceFlow id="OF8" sourceRef="OpenEdX_SendConfirmation" targetRef="End_OpenEdX" />
+    <bpmn:association id="Assoc_OE_Check" sourceRef="OpenEdX_CheckUser" targetRef="DataStoreRef_OE_Users" />
+    <bpmn:association id="Assoc_OE_Access" sourceRef="OpenEdX_OpenAccess" targetRef="DataStoreRef_OE_Enrollments" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_SkillboxFinal">
+    <bpmndi:BPMNPlane id="BPMNPlane_SkillboxFinal" bpmnElement="Collaboration_SkillboxEnrollment">
+      <bpmndi:BPMNShape id="Participant_Skillbox_di" bpmnElement="Participant_Skillbox" isHorizontal="true">
+        <dc:Bounds x="280" y="490" width="2620" height="350" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Skillbox_Request_di" bpmnElement="Start_Skillbox_Request">
+        <dc:Bounds x="360" y="637" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="337" y="673" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_LoadPrograms_di" bpmnElement="Skillbox_LoadPrograms">
+        <dc:Bounds x="440" y="615" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_LoadTariffs_di" bpmnElement="Skillbox_LoadTariffs">
+        <dc:Bounds x="620" y="615" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_SendProgramData_di" bpmnElement="Skillbox_SendProgramData">
+        <dc:Bounds x="800" y="615" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_ReceiveApplication_di" bpmnElement="Skillbox_ReceiveApplication">
+        <dc:Bounds x="1000" y="615" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_ValidateSaveApplication_di" bpmnElement="Skillbox_ValidateSaveApplication">
+        <dc:Bounds x="1170" y="615" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_GeneratePaymentLink_di" bpmnElement="Skillbox_GeneratePaymentLink">
+        <dc:Bounds x="1370" y="615" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_SendPaymentLink_di" bpmnElement="Skillbox_SendPaymentLink">
+        <dc:Bounds x="1560" y="615" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_Gateway_WaitPayment_di" bpmnElement="Skillbox_Gateway_WaitPayment">
+        <dc:Bounds x="1755" y="630" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1699" y="596" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_CatchPaymentFail_di" bpmnElement="Skillbox_CatchPaymentFail">
+        <dc:Bounds x="1855" y="722" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1836" y="685" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_SendOpenEdXRequest_di" bpmnElement="Skillbox_SendOpenEdXRequest">
+        <dc:Bounds x="2140" y="610" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_CatchOpenEdXConfirmation_di" bpmnElement="Skillbox_CatchOpenEdXConfirmation">
+        <dc:Bounds x="2335" y="632" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2313" y="582" width="80" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_SaveAccessData_di" bpmnElement="Skillbox_SaveAccessData">
+        <dc:Bounds x="2420" y="610" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_SendAccessData_di" bpmnElement="Skillbox_SendAccessData">
+        <dc:Bounds x="2610" y="610" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Skillbox_Success_di" bpmnElement="End_Skillbox_Success">
+        <dc:Bounds x="2815" y="632" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2797" y="668" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_FixPaymentFail_di" bpmnElement="Skillbox_FixPaymentFail">
+        <dc:Bounds x="1940" y="700" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreRef_Applications_di" bpmnElement="DataStoreRef_Applications">
+        <dc:Bounds x="1220" y="710" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1228" y="767" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreRef_Programs_di" bpmnElement="DataStoreRef_Programs">
+        <dc:Bounds x="480" y="735" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="463" y="792" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreRef_Tariffs_di" bpmnElement="DataStoreRef_Tariffs">
+        <dc:Bounds x="660" y="735" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="665" y="792" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_FixPaymentSuccess_di" bpmnElement="Skillbox_FixPaymentSuccess">
+        <dc:Bounds x="1940" y="540" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_CatchPaymentSuccess_di" bpmnElement="Skillbox_CatchPaymentSuccess">
+        <dc:Bounds x="1855" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1835" y="628" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreRef_Payments_di" bpmnElement="DataStoreRef_Payments">
+        <dc:Bounds x="2035" y="635" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1952" y="650" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Skillbox_SendRefusal_di" bpmnElement="Skillbox_SendRefusal">
+        <dc:Bounds x="2380" y="740" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Skillbox_Fail_di" bpmnElement="End_Skillbox_Fail">
+        <dc:Bounds x="2602" y="722" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2576" y="758" width="89" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Assoc_Programs_di" bpmnElement="Assoc_Programs">
+        <di:waypoint x="505" y="695" />
+        <di:waypoint x="505" y="735" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_Tariffs_di" bpmnElement="Assoc_Tariffs">
+        <di:waypoint x="685" y="695" />
+        <di:waypoint x="685" y="735" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_Applications_di" bpmnElement="Assoc_Applications">
+        <di:waypoint x="1245" y="695" />
+        <di:waypoint x="1245" y="710" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_PayFail_di" bpmnElement="Assoc_PayFail">
+        <di:waypoint x="2039" y="700" />
+        <di:waypoint x="2045" y="685" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_PaySuccess_di" bpmnElement="Assoc_PaySuccess">
+        <di:waypoint x="2040" y="620" />
+        <di:waypoint x="2044" y="635" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF1_di" bpmnElement="SF1">
+        <di:waypoint x="396" y="655" />
+        <di:waypoint x="440" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF2_di" bpmnElement="SF2">
+        <di:waypoint x="570" y="655" />
+        <di:waypoint x="620" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF3_di" bpmnElement="SF3">
+        <di:waypoint x="750" y="655" />
+        <di:waypoint x="800" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF4_di" bpmnElement="SF4">
+        <di:waypoint x="940" y="655" />
+        <di:waypoint x="1000" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF5_di" bpmnElement="SF5">
+        <di:waypoint x="1120" y="655" />
+        <di:waypoint x="1170" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF6_di" bpmnElement="SF6">
+        <di:waypoint x="1320" y="655" />
+        <di:waypoint x="1370" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF7_di" bpmnElement="SF7">
+        <di:waypoint x="1510" y="655" />
+        <di:waypoint x="1560" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF8_di" bpmnElement="SF8">
+        <di:waypoint x="1700" y="655" />
+        <di:waypoint x="1755" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF9_di" bpmnElement="SF9">
+        <di:waypoint x="1780" y="630" />
+        <di:waypoint x="1780" y="608" />
+        <di:waypoint x="1855" y="608" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF10_di" bpmnElement="SF10">
+        <di:waypoint x="1780" y="680" />
+        <di:waypoint x="1780" y="740" />
+        <di:waypoint x="1855" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF17_di" bpmnElement="SF17">
+        <di:waypoint x="1891" y="740" />
+        <di:waypoint x="1940" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF12_di" bpmnElement="SF12">
+        <di:waypoint x="2090" y="580" />
+        <di:waypoint x="2115" y="580" />
+        <di:waypoint x="2115" y="650" />
+        <di:waypoint x="2140" y="650" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF13_di" bpmnElement="SF13">
+        <di:waypoint x="2280" y="650" />
+        <di:waypoint x="2335" y="650" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF14_di" bpmnElement="SF14">
+        <di:waypoint x="2371" y="650" />
+        <di:waypoint x="2420" y="650" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF15_di" bpmnElement="SF15">
+        <di:waypoint x="2570" y="650" />
+        <di:waypoint x="2610" y="650" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF16_di" bpmnElement="SF16">
+        <di:waypoint x="2760" y="650" />
+        <di:waypoint x="2815" y="650" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF18_di" bpmnElement="SF18">
+        <di:waypoint x="2090" y="740" />
+        <di:waypoint x="2155" y="740" />
+        <di:waypoint x="2155" y="780" />
+        <di:waypoint x="2380" y="780" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF11_di" bpmnElement="SF11">
+        <di:waypoint x="1891" y="610" />
+        <di:waypoint x="1916" y="610" />
+        <di:waypoint x="1916" y="580" />
+        <di:waypoint x="1940" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF19_di" bpmnElement="SF19">
+        <di:waypoint x="2520" y="780" />
+        <di:waypoint x="2551" y="780" />
+        <di:waypoint x="2551" y="740" />
+        <di:waypoint x="2602" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_User_di" bpmnElement="Participant_User" isHorizontal="true">
+        <dc:Bounds x="340" y="200" width="1910" height="240" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_User_di" bpmnElement="Start_User">
+        <dc:Bounds x="420" y="297" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="410" y="333" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_RequestPage_di" bpmnElement="UserTask_RequestPage">
+        <dc:Bounds x="490" y="275" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_ReceiveProgramData_di" bpmnElement="UserTask_ReceiveProgramData">
+        <dc:Bounds x="660" y="275" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_ChooseTariff_di" bpmnElement="UserTask_ChooseTariff">
+        <dc:Bounds x="840" y="275" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_FillApplication_di" bpmnElement="UserTask_FillApplication">
+        <dc:Bounds x="1030" y="275" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_SendApplication_di" bpmnElement="UserTask_SendApplication">
+        <dc:Bounds x="1200" y="275" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_ReceivePaymentLink_di" bpmnElement="UserTask_ReceivePaymentLink">
+        <dc:Bounds x="1370" y="275" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserGateway_WaitResult_di" bpmnElement="UserGateway_WaitResult">
+        <dc:Bounds x="1725" y="290" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1670.5" y="334.5" width="77" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_ReceiveAccess_di" bpmnElement="UserTask_ReceiveAccess">
+        <dc:Bounds x="1830" y="250" width="120" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_ReceiveRefusal_di" bpmnElement="UserTask_ReceiveRefusal">
+        <dc:Bounds x="1830" y="335" width="120" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_User_Success_di" bpmnElement="End_User_Success">
+        <dc:Bounds x="2005" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1995" y="308" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_User_Fail_di" bpmnElement="End_User_Fail">
+        <dc:Bounds x="2005" y="357" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1995" y="393" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_PayProgram_di" bpmnElement="UserTask_PayProgram">
+        <dc:Bounds x="1530" y="275" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="UF1_di" bpmnElement="UF1">
+        <di:waypoint x="456" y="315" />
+        <di:waypoint x="490" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF2_di" bpmnElement="UF2">
+        <di:waypoint x="610" y="315" />
+        <di:waypoint x="660" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF3_di" bpmnElement="UF3">
+        <di:waypoint x="790" y="315" />
+        <di:waypoint x="840" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF4_di" bpmnElement="UF4">
+        <di:waypoint x="980" y="315" />
+        <di:waypoint x="1030" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF5_di" bpmnElement="UF5">
+        <di:waypoint x="1150" y="315" />
+        <di:waypoint x="1200" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF6_di" bpmnElement="UF6">
+        <di:waypoint x="1320" y="315" />
+        <di:waypoint x="1370" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF7_di" bpmnElement="UF7">
+        <di:waypoint x="1500" y="315" />
+        <di:waypoint x="1530" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF8_di" bpmnElement="UF8">
+        <di:waypoint x="1650" y="315" />
+        <di:waypoint x="1725" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF9_di" bpmnElement="UF9">
+        <di:waypoint x="1750" y="290" />
+        <di:waypoint x="1750" y="263" />
+        <di:waypoint x="1830" y="263" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF10_di" bpmnElement="UF10">
+        <di:waypoint x="1750" y="340" />
+        <di:waypoint x="1750" y="375" />
+        <di:waypoint x="1830" y="375" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF11_di" bpmnElement="UF11">
+        <di:waypoint x="1950" y="290" />
+        <di:waypoint x="2005" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UF12_di" bpmnElement="UF12">
+        <di:waypoint x="1950" y="375" />
+        <di:waypoint x="2005" y="375" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_OpenEdX_di" bpmnElement="Participant_OpenEdX" isHorizontal="true">
+        <dc:Bounds x="290" y="1240" width="1800" height="270" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_OpenEdX_Request_di" bpmnElement="Start_OpenEdX_Request">
+        <dc:Bounds x="370" y="1327" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="346" y="1372.5" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OpenEdX_CheckUser_di" bpmnElement="OpenEdX_CheckUser">
+        <dc:Bounds x="460" y="1305" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OpenEdX_Gateway_UserExists_di" bpmnElement="OpenEdX_Gateway_UserExists" isMarkerVisible="true">
+        <dc:Bounds x="670" y="1320" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="712" y="1361" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OpenEdX_CreateAccount_di" bpmnElement="OpenEdX_CreateAccount">
+        <dc:Bounds x="780" y="1390" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OpenEdX_Enroll_di" bpmnElement="OpenEdX_Enroll">
+        <dc:Bounds x="790" y="1290" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OpenEdX_OpenAccess_di" bpmnElement="OpenEdX_OpenAccess">
+        <dc:Bounds x="970" y="1290" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OpenEdX_SendConfirmation_di" bpmnElement="OpenEdX_SendConfirmation">
+        <dc:Bounds x="1160" y="1290" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_OpenEdX_di" bpmnElement="End_OpenEdX">
+        <dc:Bounds x="1355" y="1312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1343" y="1348" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreRef_OE_Users_di" bpmnElement="DataStoreRef_OE_Users">
+        <dc:Bounds x="510" y="1405" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="500" y="1462" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreRef_OE_Enrollments_di" bpmnElement="DataStoreRef_OE_Enrollments">
+        <dc:Bounds x="1015" y="1405" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="995" y="1462" width="90" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Assoc_OE_Check_di" bpmnElement="Assoc_OE_Check">
+        <di:waypoint x="535" y="1385" />
+        <di:waypoint x="535" y="1405" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_OE_Access_di" bpmnElement="Assoc_OE_Access">
+        <di:waypoint x="1040" y="1370" />
+        <di:waypoint x="1040" y="1405" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF1_di" bpmnElement="OF1">
+        <di:waypoint x="406" y="1345" />
+        <di:waypoint x="460" y="1345" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF2_di" bpmnElement="OF2">
+        <di:waypoint x="610" y="1345" />
+        <di:waypoint x="670" y="1345" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF3_di" bpmnElement="OF3">
+        <di:waypoint x="695" y="1320" />
+        <di:waypoint x="695" y="1300" />
+        <di:waypoint x="790" y="1300" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="741" y="1276" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF4_di" bpmnElement="OF4">
+        <di:waypoint x="695" y="1370" />
+        <di:waypoint x="695" y="1430" />
+        <di:waypoint x="780" y="1430" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="720" y="1413" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF5_di" bpmnElement="OF5">
+        <di:waypoint x="840" y="1390" />
+        <di:waypoint x="840" y="1370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF6_di" bpmnElement="OF6">
+        <di:waypoint x="920" y="1330" />
+        <di:waypoint x="970" y="1330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF7_di" bpmnElement="OF7">
+        <di:waypoint x="1110" y="1330" />
+        <di:waypoint x="1160" y="1330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OF8_di" bpmnElement="OF8">
+        <di:waypoint x="1300" y="1330" />
+        <di:waypoint x="1355" y="1330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_Bank_di" bpmnElement="Participant_Bank" isHorizontal="true">
+        <dc:Bounds x="280" y="950" width="1400" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Bank_PaymentRequest_di" bpmnElement="Start_Bank_PaymentRequest">
+        <dc:Bounds x="360" y="1017" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="349" y="967" width="57" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bank_ProcessPayment_di" bpmnElement="Bank_ProcessPayment">
+        <dc:Bounds x="450" y="995" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bank_Gateway_Success_di" bpmnElement="Bank_Gateway_Success" isMarkerVisible="true">
+        <dc:Bounds x="630" y="1010" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="595" y="1046" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bank_SendSuccess_di" bpmnElement="Bank_SendSuccess">
+        <dc:Bounds x="740" y="975" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bank_SendFail_di" bpmnElement="Bank_SendFail">
+        <dc:Bounds x="740" y="1070" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Bank_Success_di" bpmnElement="End_Bank_Success">
+        <dc:Bounds x="945" y="997" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="949" y="1033" width="29" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Bank_Fail_di" bpmnElement="End_Bank_Fail">
+        <dc:Bounds x="945" y="1092" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="948" y="1128" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BF1_di" bpmnElement="BF1">
+        <di:waypoint x="396" y="1035" />
+        <di:waypoint x="450" y="1035" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BF2_di" bpmnElement="BF2">
+        <di:waypoint x="570" y="1035" />
+        <di:waypoint x="630" y="1035" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BF3_di" bpmnElement="BF3">
+        <di:waypoint x="655" y="1010" />
+        <di:waypoint x="655" y="990" />
+        <di:waypoint x="740" y="990" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="699" y="966" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BF4_di" bpmnElement="BF4">
+        <di:waypoint x="655" y="1060" />
+        <di:waypoint x="655" y="1110" />
+        <di:waypoint x="740" y="1110" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="675" y="1093" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BF5_di" bpmnElement="BF5">
+        <di:waypoint x="890" y="1015" />
+        <di:waypoint x="945" y="1015" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BF6_di" bpmnElement="BF6">
+        <di:waypoint x="890" y="1110" />
+        <di:waypoint x="945" y="1110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_RequestPage_di" bpmnElement="MessageFlow_RequestPage">
+        <di:waypoint x="550" y="355" />
+        <di:waypoint x="550" y="615" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="521" y="474" width="89" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_ProgramData_di" bpmnElement="MessageFlow_ProgramData">
+        <di:waypoint x="870" y="615" />
+        <di:waypoint x="870" y="510" />
+        <di:waypoint x="725" y="510" />
+        <di:waypoint x="725" y="355" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="780" y="490" width="67" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Application_di" bpmnElement="MessageFlow_Application">
+        <di:waypoint x="1260" y="355" />
+        <di:waypoint x="1260" y="510" />
+        <di:waypoint x="1060" y="510" />
+        <di:waypoint x="1060" y="615" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1142" y="490" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_PaymentLink_di" bpmnElement="MessageFlow_PaymentLink">
+        <di:waypoint x="1630" y="615" />
+        <di:waypoint x="1630" y="510" />
+        <di:waypoint x="1435" y="510" />
+        <di:waypoint x="1435" y="355" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1571" y="496" width="55" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_PaymentFail_di" bpmnElement="MessageFlow_PaymentFail">
+        <di:waypoint x="860" y="1150" />
+        <di:waypoint x="860" y="1220" />
+        <di:waypoint x="1873" y="1220" />
+        <di:waypoint x="1873" y="758" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1327" y="1205" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Refusal_di" bpmnElement="MessageFlow_Refusal">
+        <di:waypoint x="2023" y="357" />
+        <di:waypoint x="2023" y="340" />
+        <di:waypoint x="2210" y="340" />
+        <di:waypoint x="2210" y="610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2102" y="326" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_EnrollRequest_di" bpmnElement="MessageFlow_EnrollRequest">
+        <di:waypoint x="2210" y="690" />
+        <di:waypoint x="2210" y="1270" />
+        <di:waypoint x="388" y="1270" />
+        <di:waypoint x="388" y="1327" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2195" y="972" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_EnrollConfirm_di" bpmnElement="MessageFlow_EnrollConfirm">
+        <di:waypoint x="1230" y="1370" />
+        <di:waypoint x="1230" y="1560" />
+        <di:waypoint x="2340" y="1550" />
+        <di:waypoint x="2353" y="668" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1777" y="1540" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_AccessData_di" bpmnElement="MessageFlow_AccessData">
+        <di:waypoint x="1890" y="250" />
+        <di:waypoint x="1890" y="150" />
+        <di:waypoint x="2685" y="150" />
+        <di:waypoint x="2685" y="610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2256" y="159" width="83" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_PaymentSuccess_di" bpmnElement="MessageFlow_PaymentSuccess">
+        <di:waypoint x="770" y="975" />
+        <di:waypoint x="770" y="570" />
+        <di:waypoint x="1873" y="570" />
+        <di:waypoint x="1873" y="592" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1283" y="556" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_PaymentRequest_di" bpmnElement="MessageFlow_PaymentRequest">
+        <di:waypoint x="1590" y="275" />
+        <di:waypoint x="1590" y="80" />
+        <di:waypoint x="190" y="80" />
+        <di:waypoint x="190" y="1220" />
+        <di:waypoint x="378" y="1220" />
+        <di:waypoint x="378" y="1053" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="645" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0ujna9e_di" bpmnElement="DataOutputAssociation_0ujna9e">
+        <di:waypoint x="780" y="1442" />
+        <di:waypoint x="560" y="1442" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0bajukf_di" bpmnElement="DataOutputAssociation_0bajukf">
+        <di:waypoint x="920" y="1370" />
+        <di:waypoint x="1015" y="1427" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

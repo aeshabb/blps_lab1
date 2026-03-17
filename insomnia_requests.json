@@ -1,0 +1,103 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-11-20T12:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.5",
+  "resources": [
+    {
+      "_id": "req_1",
+      "parentId": "wrk_1",
+      "modified": 1690000000000,
+      "created": 1690000000000,
+      "url": "http://localhost:8080/api/programs",
+      "name": "Get Programs",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1690000000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2",
+      "parentId": "wrk_1",
+      "modified": 1690000000001,
+      "created": 1690000000001,
+      "url": "http://localhost:8080/api/applications",
+      "name": "Create Application",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"programId\": 1,\n  \"tariffId\": 1,\n  \"userEmail\": \"student@skillbox.com\",\n  \"userName\": \"Ivan Ivanov\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690000000001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3",
+      "parentId": "wrk_1",
+      "modified": 1690000000002,
+      "created": 1690000000002,
+      "url": "http://localhost:8080/api/payments/webhook",
+      "name": "Bank Webhook Success",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"applicationId\": 1,\n  \"status\": \"SUCCESS\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690000000002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_1",
+      "parentId": "wrk_1",
+      "modified": 1690000000000,
+      "created": 1690000000000,
+      "name": "BLPS Lab 1 Skillbox",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    }
+  ]
+}
