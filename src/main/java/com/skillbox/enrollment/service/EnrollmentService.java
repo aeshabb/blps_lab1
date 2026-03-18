@@ -78,4 +78,17 @@ public class EnrollmentService {
         paymentRepository.save(payment);
         applicationRepository.save(app);
     }
+
+    @Transactional(readOnly = true)
+    public ApplicationResponse getApplication(Long id) {
+        Application app = applicationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Application not found"));
+        Payment payment = paymentRepository.findByApplicationId(id);
+        
+        return new ApplicationResponse(
+                app.getId(), 
+                app.getStatus().name(), 
+                payment != null ? payment.getPaymentLink() : null
+        );
+    }
 }

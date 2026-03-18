@@ -7,6 +7,7 @@ import com.skillbox.enrollment.model.Tariff;
 import com.skillbox.enrollment.repository.ProgramRepository;
 import com.skillbox.enrollment.repository.TariffRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProgramService {
     private final ProgramRepository programRepository;
     private final TariffRepository tariffRepository;
 
+    @Cacheable(value = "programs")
     public List<ProgramDto> getAllPrograms() {
         return programRepository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
     }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillbox Enrollment Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container { max-width: 800px; margin-top: 50px; }
+        .step { display: none; }
+        .step.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Запись на курс Skillbox</h1>
+        
+        <div id="step-1" class="step active card p-4 mb-4 shadow-sm">
+            <h3>Оформление заявки</h3>
+            <form id="application-form">
+                <div class="mb-3">
+                    <label for="userName" class="form-label">Ваше Имя</label>
+                    <input type="text" class="form-control" id="userName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userEmail" class="form-label">Ваш Email</label>
+                    <input type="email" class="form-control" id="userEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label for="programSelect" class="form-label">Программа курса</label>
+                    <select class="form-select" id="programSelect" required>
+                        <option value="">Загрузка программ...</option>
+                    </select>
+                </div>
+                <div class="mb-3" id="tariffWrapper" style="display: none;">
+                    <label for="tariffSelect" class="form-label">Тариф</label>
+                    <select class="form-select" id="tariffSelect" required>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Подать заявку</button>
+            </form>
+        </div>
+
+        <div id="step-2" class="step card p-4 mb-4 shadow-sm">
+            <h3 class="text-center">Оплата заказа <span id="displayAppId"></span></h3>
+            <p class="text-center">К оплате: <strong id="displayAmount"></strong> ₽ (Статус: <span id="displayStatus" class="text-primary"></span>)</p>
+            <hr>
+            
+            <h5>Шлюз оплаты Mock-Bank</h5>
+            <p class="text-muted small">Выберите платежный метод:</p>
+            
+            <form id="payment-form">
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="cardSelect" id="cardSuccess" value="SUCCESS" checked>
+                        <label class="form-check-label text-success" for="cardSuccess">
+                            4276 1111 2222 3333 — <b>Успешная оплата</b> (Достаточно средств)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="cardSelect" id="cardNoMoney" value="FAILED_NO_MONEY">
+                        <label class="form-check-label text-danger" for="cardNoMoney">
+                            1111 2222 3333 4444 — <b>Отказ</b> (Недостаточно средств)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="cardSelect" id="cardInvalid" value="FAILED_INVALID">
+                        <label class="form-check-label text-danger" for="cardInvalid">
+                            0000 0000 0000 0000 — <b>Отказ</b> (Недействительная карта)
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning w-100" id="payBtn">Оплатить</button>
+            </form>
+        </div>
+
+        <div id="step-3" class="step card p-4 mb-4 shadow-sm border-success text-center">
+            <h3 class="text-success">Оплата прошла успешно!</h3>
+            <p>Статус заявки: <strong id="finalStatus" class="text-success"></strong></p>
+            <p>Вы были успешно зачислены на платформу. Письмо с доступами отправлено на вашу почту.</p>
+            <button class="btn btn-primary mt-3" onclick="location.reload()">Оформить новую заявку</button>
+        </div>
+
+        <div id="step-4" class="step card p-4 mb-4 shadow-sm border-danger text-center">
+            <h3 class="text-danger">Ошибка оплаты!</h3>
+            <p>Статус заявки: <strong id="failStatus" class="text-danger"></strong></p>
+            <p>К сожалению, транзакция отклонена.</p>
+            <button class="btn btn-primary mt-3" onclick="location.reload()">Начать заново</button>
+        </div>
+
+        <div id="alertBox" class="alert d-none mt-3" role="alert"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

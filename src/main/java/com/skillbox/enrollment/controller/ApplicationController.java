@@ -18,4 +18,9 @@ public class ApplicationController {
     public ResponseEntity<ApplicationResponse> createApplication(@RequestBody ApplicationRequest request) {
         return ResponseEntity.ok(enrollmentService.createApplication(request));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApplicationResponse> getApplication(@PathVariable Long id) {
+        return ResponseEntity.ok(enrollmentService.getApplication(id));
+    }
 }
