@@ -41,37 +41,33 @@
             </form>
         </div>
 
+        <div class="card p-4 mb-4 shadow-sm">
+            <h3>Регистрация и зачисление в Open edX</h3>
+            <p class="text-muted small mb-3">Проверка прямой интеграции с Tutor/Open edX через backend endpoint.</p>
+            <form id="openedx-form">
+                <div class="mb-3">
+                    <label for="openedxEmail" class="form-label">Email пользователя</label>
+                    <input type="email" class="form-control" id="openedxEmail" placeholder="student@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="openedxProgramSelect" class="form-label">Курс Open edX</label>
+                    <select class="form-select" id="openedxProgramSelect" required>
+                        <option value="">Выберите программу...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-outline-primary" id="openedxSubmitBtn">Зарегистрировать и зачислить</button>
+            </form>
+            <div id="openedxResult" class="alert d-none mt-3" role="alert"></div>
+        </div>
+
         <div id="step-2" class="step card p-4 mb-4 shadow-sm">
             <h3 class="text-center">Оплата заказа <span id="displayAppId"></span></h3>
             <p class="text-center">К оплате: <strong id="displayAmount"></strong> ₽ (Статус: <span id="displayStatus" class="text-primary"></span>)</p>
             <hr>
-            
-            <h5>Шлюз оплаты Mock-Bank</h5>
-            <p class="text-muted small">Выберите платежный метод:</p>
-            
-            <form id="payment-form">
-                <div class="mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="cardSelect" id="cardSuccess" value="SUCCESS" checked>
-                        <label class="form-check-label text-success" for="cardSuccess">
-                            4276 1111 2222 3333 — <b>Успешная оплата</b> (Достаточно средств)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="cardSelect" id="cardNoMoney" value="FAILED_NO_MONEY">
-                        <label class="form-check-label text-danger" for="cardNoMoney">
-                            1111 2222 3333 4444 — <b>Отказ</b> (Недостаточно средств)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="cardSelect" id="cardInvalid" value="FAILED_INVALID">
-                        <label class="form-check-label text-danger" for="cardInvalid">
-                            0000 0000 0000 0000 — <b>Отказ</b> (Недействительная карта)
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-warning w-100" id="payBtn">Оплатить</button>
-            </form>
+
+            <h5>Переход в платежный шлюз</h5>
+            <p class="text-muted small">Нажмите кнопку ниже, чтобы перейти на отдельный endpoint оплаты.</p>
+            <a id="paymentLinkBtn" class="btn btn-warning w-100" href="#">Перейти к оплате</a>
         </div>
 
         <div id="step-3" class="step card p-4 mb-4 shadow-sm border-success text-center">

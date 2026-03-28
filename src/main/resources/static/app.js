@@ -1,19 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     let programsData = [];
     let currentAppId = null;
+    const queryParams = new URLSearchParams(window.location.search);
 
     const programSelect = document.getElementById('programSelect');
     const tariffSelect = document.getElementById('tariffSelect');
     const tariffWrapper = document.getElementById('tariffWrapper');
     const form = document.querySelector('form');
+    const paymentLinkBtn = document.getElementById('paymentLinkBtn');
+    const openedxProgramSelect = document.getElementById('openedxProgramSelect');
+    const openedxForm = document.getElementById('openedx-form');
+    const openedxEmailInput = document.getElementById('openedxEmail');
+    const openedxResult = document.getElementById('openedxResult');
+    const openedxSubmitBtn = document.getElementById('openedxSubmitBtn');
 
     fetch('/api/programs')
         .then(response => response.json())
         .then(data => {
             programsData = data;
             programSelect.innerHTML = '<option value="">Выберите программу...</option>';
+            openedxProgramSelect.innerHTML = '<option value="">Выберите программу...</option>';
             data.forEach(prog => {
                 programSelect.innerHTML += `<option value="${prog.id}">${prog.title}</option>`;
+                openedxProgramSelect.innerHTML += `<option value="${prog.id}">${prog.title} (${prog.openEdxCourseId})</option>`;
             });
             tariffWrapper.style.display = 'block';
         })
@@ -61,38 +70,83 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('displayAppId').innerText = `#${data.id}`;
             document.getElementById('displayStatus').innerText = data.status;
             document.getElementById('displayAmount').innerText = tariff.price;
+            paymentLinkBtn.href = normalizePaymentLink(data.paymentLink);
             
             startStatusPolling();
         })
         .catch(err => alert("Ошибка создания заявки: " + err));
     });
 
-    document.getElementById('payment-form').addEventListener('submit', (e) => {
+    openedxForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (!currentAppId) return;
 
-        const selectedCard = document.querySelector('input[name="cardSelect"]:checked').value;
-        const btn = document.getElementById('payBtn');
-        btn.innerText = "Обработка транзакции...";
-        btn.disabled = true;
+        const email = openedxEmailInput.value.trim();
+        const programId = parseInt(openedxProgramSelect.value);
+        const program = programsData.find(p => p.id === programId);
 
-        const webhookStatus = selectedCard === 'SUCCESS' ? 'SUCCESS' : 'FAILED';
+        if (!program || !program.openEdxCourseId) {
+            showOpenEdxResult('Выберите программу с корректным courseId.', false);
+            return;
+        }
 
-        fetch('/api/payments/webhook', {
+        openedxSubmitBtn.disabled = true;
+        openedxSubmitBtn.innerText = 'Отправка запроса...';
+
+        fetch('/api/openedx/register-enroll', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                applicationId: currentAppId,
-                status: webhookStatus
+                email,
+                courseId: program.openEdxCourseId
             })
         })
-        .then(res => {
-            if (res.ok) {
-                btn.innerText = "Ответ от банка получен...";
+        .then(async (res) => {
+            const payload = await res.json();
+            if (!res.ok || !payload.success) {
+                throw new Error(payload.message || 'Open edX request failed');
             }
+            showOpenEdxResult(`Успех: ${payload.message}`, true);
         })
-        .catch(err => alert("Ошибка Webhook: " + err));
+        .catch((err) => {
+            showOpenEdxResult(`Ошибка: ${err.message}`, false);
+        })
+        .finally(() => {
+            openedxSubmitBtn.disabled = false;
+            openedxSubmitBtn.innerText = 'Зарегистрировать и зачислить';
+        });
     });
+
+    function showOpenEdxResult(message, success) {
+        openedxResult.classList.remove('d-none', 'alert-success', 'alert-danger');
+        openedxResult.classList.add(success ? 'alert-success' : 'alert-danger');
+        openedxResult.innerText = message;
+    }
+
+    function normalizePaymentLink(link) {
+        if (!link) {
+            return '#';
+        }
+        if (link.startsWith('http://') || link.startsWith('https://')) {
+            return link;
+        }
+        return `${window.location.origin}${link}`;
+    }
+
+    function restoreFromReturn() {
+        const returnedAppId = parseInt(queryParams.get('applicationId'));
+        if (!returnedAppId) {
+            return;
+        }
+
+        currentAppId = returnedAppId;
+        document.getElementById('step-1').classList.remove('active');
+        document.getElementById('step-3').classList.remove('active');
+        document.getElementById('step-4').classList.remove('active');
+        document.getElementById('step-2').classList.add('active');
+        document.getElementById('displayAppId').innerText = `#${currentAppId}`;
+
+        startStatusPolling();
+    }
 
     function startStatusPolling() {
         const interval = setInterval(() => {
@@ -123,4 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }, 2000);
     }
+
+    restoreFromReturn();
 });

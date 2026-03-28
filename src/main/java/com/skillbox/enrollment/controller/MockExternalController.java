@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/mock")
@@ -16,11 +15,12 @@ public class MockExternalController {
 
     @PostMapping("/bank/generate-link")
     public ResponseEntity<Map<String, String>> generateBankLink(@RequestBody Map<String, Object> request) {
+        Object applicationId = request.get("applicationId");
         Object amount = request.get("amount");
-        log.info("Mock Bank: Generating payment link for amount {}", amount);
-        
-        String dummyLink = "https://mock-bank.example.com/pay/" + UUID.randomUUID().toString();
-        return ResponseEntity.ok(Map.of("paymentLink", dummyLink));
+        log.info("Mock Bank: Generating payment link for application {}, amount {}", applicationId, amount);
+
+        String paymentLink = "/payment-gateway.html?applicationId=" + applicationId;
+        return ResponseEntity.ok(Map.of("paymentLink", paymentLink));
     }
 
     @PostMapping("/openedx/enroll")

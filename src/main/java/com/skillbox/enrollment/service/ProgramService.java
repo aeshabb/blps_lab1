@@ -30,6 +30,12 @@ public class ProgramService {
                 .stream()
                 .map(t -> new TariffDto(t.getId(), t.getName(), t.getPrice()))
                 .collect(Collectors.toList());
-        return new ProgramDto(program.getId(), program.getTitle(), program.getDescription(), tariffs);
+        return new ProgramDto(
+            program.getId(),
+            program.getTitle(),
+            program.getDescription(),
+            program.getOpenEdxCourseId(),
+            tariffs
+        );
     }
 }

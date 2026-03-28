@@ -7,5 +7,6 @@ public record ProgramDto(
     Long id,
     String title,
     String description,
+    String openEdxCourseId,
     List<TariffDto> tariffs
 ) {}
