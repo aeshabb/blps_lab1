@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/controller\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/controller\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/dto\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/dto\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/security\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/security\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/resources/\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/resources/\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/controller\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/dto\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/security\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/service\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/\")",
+      "Bash(cp -r \"C:/Users/tyz98/blps_lab1/src/main/java/com/skillbox/enrollment/config\" \"C:/Users/tyz98/blps_lab1/enrollment-api/src/main/java/com/skillbox/enrollment/\")"
+    ]
+  }
+}

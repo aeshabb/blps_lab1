@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillbox Enrollment System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .container { max-width: 800px; margin-top: 50px; }
+        .step { display: none; }
+        .step.active { display: block; }
+        .role-section { display: none; }
+        #main-content { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Система записи Skillbox</h1>
+            <div id="user-info-container" class="text-end" style="display: none;">
+                <div id="user-info" class="text-muted mb-2"></div>
+                <button id="logoutBtn" class="btn btn-sm btn-outline-danger">Выйти</button>
+            </div>
+        </div>
+
+        <!-- AUTH SECTION -->
+        <div id="auth-section" class="card p-4 mb-4 shadow-sm mx-auto" style="max-width: 400px;">
+            <h3 class="text-center mb-3">Вход в систему</h3>
+            <form id="login-form">
+                <div class="mb-3">
+                    <label class="form-label">Логин (tutor, admin, student)</label>
+                    <input type="text" class="form-control" id="loginUsername" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </div>
+                <div id="loginError" class="text-danger mt-2 d-none">Ошибка входа. Проверьте логин и пароль.</div>
+            </form>
+        </div>
+
+        <!-- MAIN CONTENT SECTION -->
+        <div id="main-content">
+            
+            <div id="admin-section" class="role-section card p-4 mb-4 shadow-sm border-warning">
+                <h3 class="text-warning">Управление программами (Админ)</h3>
+                <form id="add-program-form">
+                    <div class="mb-3"><label class="form-label">Название программы</label><input type="text" class="form-control" id="newProgramTitle" required></div>
+                    <div class="mb-3"><label class="form-label">Описание</label><input type="text" class="form-control" id="newProgramDesc" required></div>
+                    <div class="mb-3"><label class="form-label">Open edX Course ID</label><input type="text" class="form-control" id="newProgramCourseId" required></div>
+                    <button type="submit" class="btn btn-warning">Добавить программу в БД</button>
+                </form>
+                <div id="addProgramResult" class="alert d-none mt-3" role="alert"></div>
+                
+                <div class="mt-4">
+                    <h4>Текущие программы:</h4>
+                    <ul id="adminProgramsList" class="list-group"></ul>
+                </div>
+            </div>
+
+            <div id="tutor-section" class="role-section card p-4 mb-4 shadow-sm border-info">
+                <h3 class="text-info">Управление заявками (Преподаватель)</h3>
+                
+                <div class="mt-3 mb-4">
+                    <h4>Все заявки:</h4>
+                    <button class="btn btn-sm btn-outline-info mb-2" id="refreshAppsBtn">Обновить список</button>
+                    <ul id="tutorAppsList" class="list-group"></ul>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" id="tutorAppId" placeholder="ID заявки">
+                    <button id="loadAppBtn" class="btn btn-info">Проверить</button>
+                </div>
+                <div id="tutorAppDetails" class="alert d-none mb-3" role="alert"></div>
+                <button id="approveAppBtn" class="btn btn-success d-none">Одобрить заявку (Зачислить)</button>
+                <div id="tutorResultBox" class="alert d-none mt-2" role="alert"></div>
+            </div>
+            
+            <div id="step-1" class="step card p-4 mb-4 shadow-sm role-section">
+                <h3>Оформление заявки (Студент)</h3>
+                <form id="application-form">
+                    <div class="mb-3"><label for="userName" class="form-label">Ваше Имя</label><input type="text" class="form-control" id="userName" required></div>
+                    <div class="mb-3"><label for="userEmail" class="form-label">Ваш Email</label><input type="email" class="form-control" id="userEmail" required></div>
+                    <div class="mb-3">
+                        <label for="programSelect" class="form-label">Программа курса</label>
+                        <select class="form-select" id="programSelect" required><option value="">Загрузка программ...</option></select>
+                    </div>
+                    <div class="mb-3" id="tariffWrapper" style="display: none;">
+                        <label for="tariffSelect" class="form-label">Тариф</label>
+                        <select class="form-select" id="tariffSelect" required></select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Подать заявку</button>
+                </form>
+            </div>
+
+            <div id="step-2" class="step card p-4 mb-4 shadow-sm">
+                <h3 class="text-center">Заявка создана <span id="displayAppId"></span></h3>
+                <p class="text-center">Сумма к оплате: <strong id="displayAmount"></strong> ₽ </p>
+                <p class="text-center">Статус: <strong id="displayStatus" class="text-primary"></strong></p>
+                <hr>
+                <a id="paymentLinkBtn" class="btn btn-warning w-100" href="#">Перейти на страницу оплаты</a>
+            </div>
+
+            <div id="step-3" class="step card p-4 mb-4 shadow-sm border-success text-center">
+                <h3 class="text-success">Оплата прошла успешно!</h3>
+                <p>Статус заявки: <strong class="text-success">ОПЛАЧЕНО / ЗАЧИСЛЕНО</strong></p>
+                <button class="btn btn-primary mt-3" onclick="window.location.href='/'">На главную</button>
+            </div>
+
+            <div id="step-4" class="step card p-4 mb-4 shadow-sm border-danger text-center">
+                <h3 class="text-danger">Ошибка оплаты</h3>
+                <p>Статус заявки: <strong class="text-danger">ОТМЕНЕНА</strong></p>
+                <button class="btn btn-primary mt-3" onclick="window.location.href='/'">На главную</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

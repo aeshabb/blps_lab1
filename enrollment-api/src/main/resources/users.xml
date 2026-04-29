@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+    <user username="admin" password="{noop}admin" roles="ROLE_ADMIN" privileges="READ_COURSES,WRITE_COURSES" />
+    <user username="tutor" password="{noop}tutor" roles="ROLE_TUTOR" privileges="READ_COURSES,MANAGE_APPLICATIONS" />
+    <user username="student" password="{noop}student" roles="ROLE_USER" privileges="READ_COURSES,APPLY_COURSE" />
+</users>
