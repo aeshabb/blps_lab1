@@ -6,7 +6,7 @@ class EnrollmentApplicationTests {
 
     @Test
     void simpleTest() {
-        // empty test just to pass maven build without context load
+        
     }
 
 }

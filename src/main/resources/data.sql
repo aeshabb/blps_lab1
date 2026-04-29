@@ -8,3 +8,6 @@ INSERT INTO tariffs (id, name, price, program_id) VALUES
 (2, 'Индивидуальный', 100000.00, 1),
 (3, 'Базовый', 45000.00, 2)
 ON CONFLICT DO NOTHING;
+
+SELECT setval(pg_get_serial_sequence('programs', 'id'), coalesce(max(id), 1), max(id) IS NOT null) FROM programs;
+SELECT setval(pg_get_serial_sequence('tariffs', 'id'), coalesce(max(id), 1), max(id) IS NOT null) FROM tariffs;

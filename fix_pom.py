@@ -1,35 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.skillbox</groupId>
-	<artifactId>enrollment</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>enrollment</name>
-	<description/>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
-	<dependencies>
+import re
+
+with open('/home/aeshabb/ITMO/blps/lab2/pom.xml', 'r') as f:
+    text = f.read()
+
+start = text.find('<dependencies>')
+end = text.find('</dependencies>') + len('</dependencies>')
+
+clean_deps = """<dependencies>
                 <!-- Security -->
                 <dependency>
                         <groupId>org.springframework.boot</groupId>
@@ -91,35 +68,9 @@
                         <artifactId>spring-boot-starter-webmvc-test</artifactId>
                         <scope>test</scope>
                 </dependency>
-        </dependencies>
+        </dependencies>"""
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+text = text[:start] + clean_deps + text[end:]
 
-</project>
+with open('/home/aeshabb/ITMO/blps/lab2/pom.xml', 'w') as f:
+    f.write(text)

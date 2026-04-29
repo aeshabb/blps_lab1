@@ -3,9 +3,7 @@ package com.skillbox.enrollment.controller;
 import com.skillbox.enrollment.dto.ProgramDto;
 import com.skillbox.enrollment.service.ProgramService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class ProgramController {
     @GetMapping
     public List<ProgramDto> getPrograms() {
         return programService.getAllPrograms();
+    }
+
+    @PostMapping
+    public ProgramDto createProgram(@RequestBody ProgramDto programDto) {
+        return programService.createProgram(programDto);
     }
 }

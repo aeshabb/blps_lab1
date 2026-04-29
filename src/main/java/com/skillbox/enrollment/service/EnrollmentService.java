@@ -10,8 +10,7 @@ import com.skillbox.enrollment.repository.TariffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
+// We will mock sending websocket updates later, but add them here conceptually
 
 @Service
 @RequiredArgsConstructor
@@ -44,9 +43,7 @@ public class EnrollmentService {
         payment.setAmount(tariff.getPrice());
         payment.setStatus("PENDING");
         
-        // Receive payment link from the bank service
         String paymentLink = bankService.generatePaymentLink(app.getId(), tariff.getPrice());
-        
         payment.setPaymentLink(paymentLink);
         paymentRepository.save(payment);
 
@@ -63,7 +60,6 @@ public class EnrollmentService {
             payment.setStatus("SUCCESS");
             app.setStatus(ApplicationStatus.PAYMENT_SUCCESS);
             
-            // Trigger Open EdX enrollment
             boolean enrolled = openEdxService.enrollUser(app.getUserEmail(), app.getProgram().getOpenEdxCourseId());
             if (enrolled) {
                 app.setStatus(ApplicationStatus.ENROLLED);
@@ -85,6 +81,35 @@ public class EnrollmentService {
                 .orElseThrow(() -> new IllegalArgumentException("Application not found"));
         Payment payment = paymentRepository.findByApplicationId(id);
         
+        return new ApplicationResponse(
+                app.getId(), 
+                app.getStatus().name(), 
+                payment != null ? payment.getPaymentLink() : null
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public java.util.List<ApplicationResponse> getAllApplications() {
+        return applicationRepository.findAll().stream().map(app -> {
+            Payment payment = paymentRepository.findByApplicationId(app.getId());
+            return new ApplicationResponse(
+                    app.getId(),
+                    app.getStatus().name(),
+                    payment != null ? payment.getPaymentLink() : null
+            );
+        }).toList();
+    }
+
+    @Transactional
+    public ApplicationResponse approveApplication(Long id) {
+        Application app = applicationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Application not found"));
+
+        // Admin/tutor check should happen via controller security
+        app.setStatus(ApplicationStatus.ENROLLED);
+        applicationRepository.save(app);
+        
+        Payment payment = paymentRepository.findByApplicationId(id);
         return new ApplicationResponse(
                 app.getId(), 
                 app.getStatus().name(), 

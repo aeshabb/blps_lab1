@@ -6,6 +6,7 @@ import com.skillbox.enrollment.service.EnrollmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/applications")
@@ -13,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class ApplicationController {
 
     private final EnrollmentService enrollmentService;
+
+    @GetMapping
+    public ResponseEntity<List<ApplicationResponse>> getAllApplications() {
+        return ResponseEntity.ok(enrollmentService.getAllApplications());
+    }
 
     @PostMapping
     public ResponseEntity<ApplicationResponse> createApplication(@RequestBody ApplicationRequest request) {
@@ -22,5 +28,10 @@ public class ApplicationController {
     @GetMapping("/{id}")
     public ResponseEntity<ApplicationResponse> getApplication(@PathVariable Long id) {
         return ResponseEntity.ok(enrollmentService.getApplication(id));
+    }
+
+    @PostMapping("/{id}/approve")
+    public ResponseEntity<ApplicationResponse> approveApplication(@PathVariable Long id) {
+        return ResponseEntity.ok(enrollmentService.approveApplication(id));
     }
 }

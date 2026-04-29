@@ -7,11 +7,13 @@ import com.skillbox.enrollment.model.Tariff;
 import com.skillbox.enrollment.repository.ProgramRepository;
 import com.skillbox.enrollment.repository.TariffRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +25,25 @@ public class ProgramService {
     @Cacheable(value = "programs")
     public List<ProgramDto> getAllPrograms() {
         return programRepository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
+    }
+
+    @CacheEvict(value = "programs", allEntries = true)
+    public ProgramDto createProgram(ProgramDto dto) {
+        Program program = new Program();
+        program.setTitle(dto.title());
+        program.setDescription(dto.description());
+        program.setOpenEdxCourseId(dto.openEdxCourseId());
+        
+        Program saved = programRepository.save(program);
+        
+        // create a default tariff
+        Tariff tariff = new Tariff();
+        tariff.setName("Standard");
+        tariff.setPrice(BigDecimal.valueOf(1000));
+        tariff.setProgram(saved);
+        tariffRepository.save(tariff);
+        
+        return mapToDto(saved);
     }
 
     private ProgramDto mapToDto(Program program) {
