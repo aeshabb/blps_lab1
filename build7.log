@@ -1,0 +1,315 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mReactor Build Order:[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] enrollment-parent                                                  [pom]
+[[1;34mINFO[m] enrollment-common                                                  [jar]
+[[1;34mINFO[m] enrollment-api                                                     [jar]
+[[1;34mINFO[m] enrollment-worker                                                  [jar]
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-parent[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-parent 0.0.1-SNAPSHOT                          [1/4][m
+[[1;34mINFO[m] [1m--------------------------------[ pom ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-parent[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-common[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-common 0.0.1-SNAPSHOT                          [2/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-common/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/main/resources
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 11 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:testCompile[m [1m(default-testCompile)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.5.4:test[m [1m(default-test)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.2:jar[m [1m(default-jar)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Building jar: /home/aeshabb/ITMO/blps/lab2/enrollment-common/target/enrollment-common-0.0.1-SNAPSHOT.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--------------------< [0;36mcom.skillbox:enrollment-api[0;1m >---------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-api 0.0.1-SNAPSHOT                             [3/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-api/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 6 resources from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 24 source files with javac [debug parameters release 17] to target/classes
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/config/JmsConfig.java:[33,9] org.springframework.jms.support.converter.MappingJackson2MessageConverter in org.springframework.jms.support.converter has been deprecated and marked for removal
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/config/JmsConfig.java:[33,57] org.springframework.jms.support.converter.MappingJackson2MessageConverter in org.springframework.jms.support.converter has been deprecated and marked for removal
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/config/RedisConfig.java:[19,101] org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer in org.springframework.data.redis.serializer has been deprecated and marked for removal
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:testCompile[m [1m(default-testCompile)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.5.4:test[m [1m(default-test)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.2:jar[m [1m(default-jar)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Building jar: /home/aeshabb/ITMO/blps/lab2/enrollment-api/target/enrollment-api-0.0.1-SNAPSHOT.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:4.0.3:repackage[m [1m(repackage)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Replacing main artifact /home/aeshabb/ITMO/blps/lab2/enrollment-api/target/enrollment-api-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[[1;34mINFO[m] The original artifact has been renamed to /home/aeshabb/ITMO/blps/lab2/enrollment-api/target/enrollment-api-0.0.1-SNAPSHOT.jar.original
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-worker[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-worker 0.0.1-SNAPSHOT                          [4/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-worker[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-worker/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-worker[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 0 resource from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-worker[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 16 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] COMPILATION ERROR : 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[18,5] illegal start of expression
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[30,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[34,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[36,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[38,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[40,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[42,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[46,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[48,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[50,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[52,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[54,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[57,22] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[58,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[60,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[62,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[64,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[66,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[69,22] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[71,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[72,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[74,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[76,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[78,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[80,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[82,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[83,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[85,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[87,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[89,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[91,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[93,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[94,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[96,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[98,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[100,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[102,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[104,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[105,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[107,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[109,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[111,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[113,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[115,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[116,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[118,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[120,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[122,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[124,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[126,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[126,120] <identifier> expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[127,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[129,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[131,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[133,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[135,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[137,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[139,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[141,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[143,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[145,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[147,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[148,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[150,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[152,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[154,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[156,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[158,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[159,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[161,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[163,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[165,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[167,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[169,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[170,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[172,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[174,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[176,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[178,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[183,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[185,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[187,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[189,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[192,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[194,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[196,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[198,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[200,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[203,22] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[206,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[208,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[210,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[212,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[214,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[219,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[221,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[223,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[225,5] class, interface, enum, or record expected
+[[1;34mINFO[m] 98 errors 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mReactor Summary for enrollment-parent 0.0.1-SNAPSHOT:[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] enrollment-parent .................................. [1;32mSUCCESS[m [  0.200 s]
+[[1;34mINFO[m] enrollment-common .................................. [1;32mSUCCESS[m [  2.944 s]
+[[1;34mINFO[m] enrollment-api ..................................... [1;32mSUCCESS[m [  1.332 s]
+[[1;34mINFO[m] enrollment-worker .................................. [1;31mFAILURE[m [  0.097 s]
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  5.143 s
+[[1;34mINFO[m] Finished at: 2026-04-29T19:00:24+03:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m on project [36menrollment-worker[m: [1;31mCompilation failure[m: Compilation failure: 
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[18,5] illegal start of expression
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[30,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[34,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[36,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[38,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[40,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[42,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[46,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[48,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[50,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[52,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[54,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[57,22] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[58,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[60,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[62,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[64,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[66,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[69,22] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[71,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[72,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[74,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[76,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[78,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[80,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[82,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[83,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[85,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[87,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[89,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[91,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[93,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[94,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[96,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[98,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[100,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[102,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[104,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[105,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[107,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[109,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[111,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[113,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[115,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[116,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[118,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[120,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[122,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[124,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[126,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[126,120] <identifier> expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[127,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[129,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[131,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[133,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[135,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[137,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[139,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[141,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[143,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[145,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[147,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[148,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[150,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[152,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[154,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[156,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[158,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[159,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[161,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[163,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[165,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[167,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[169,20] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[170,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[172,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[174,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[176,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[178,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[183,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[185,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[187,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[189,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[192,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[194,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[196,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[198,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[200,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[203,22] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[206,13] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[208,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[210,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[212,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[214,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[219,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[221,5] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[223,12] class, interface, enum, or record expected
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[225,5] class, interface, enum, or record expected
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[[1;31mERROR[m] 
+[[1;31mERROR[m] After correcting the problems, you can resume the build with the command
+[[1;31mERROR[m]   [1mmvn <args> -rf :enrollment-worker[m

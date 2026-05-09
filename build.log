@@ -1,0 +1,109 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mReactor Build Order:[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] enrollment-parent                                                  [pom]
+[[1;34mINFO[m] enrollment-common                                                  [jar]
+[[1;34mINFO[m] enrollment-api                                                     [jar]
+[[1;34mINFO[m] enrollment-worker                                                  [jar]
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-parent[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-parent 0.0.1-SNAPSHOT                          [1/4][m
+[[1;34mINFO[m] [1m--------------------------------[ pom ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-parent[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-common[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-common 0.0.1-SNAPSHOT                          [2/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-common/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/main/resources
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 11 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:testCompile[m [1m(default-testCompile)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.5.4:test[m [1m(default-test)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.2:jar[m [1m(default-jar)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Building jar: /home/aeshabb/ITMO/blps/lab2/enrollment-common/target/enrollment-common-0.0.1-SNAPSHOT.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--------------------< [0;36mcom.skillbox:enrollment-api[0;1m >---------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-api 0.0.1-SNAPSHOT                             [3/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-api/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 6 resources from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 25 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] COMPILATION ERROR : 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/EnrollmentApplication.java:[5,53] package org.springframework.boot.autoconfigure.domain does not exist
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/EnrollmentApplication.java:[11,2] cannot find symbol
+  symbol: class EntityScan
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/controller/OpenEdxController.java:[4,39] cannot find symbol
+  symbol:   class OpenEdxService
+  location: package com.skillbox.enrollment.service
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/controller/OpenEdxController.java:[16,19] cannot find symbol
+  symbol:   class OpenEdxService
+  location: class com.skillbox.enrollment.controller.OpenEdxController
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/controller/OpenEdxController.java:[13,1] cannot find symbol
+  symbol:   class OpenEdxService
+  location: class com.skillbox.enrollment.controller.OpenEdxController
+[[1;34mINFO[m] 5 errors 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mReactor Summary for enrollment-parent 0.0.1-SNAPSHOT:[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] enrollment-parent .................................. [1;32mSUCCESS[m [  0.162 s]
+[[1;34mINFO[m] enrollment-common .................................. [1;32mSUCCESS[m [  4.095 s]
+[[1;34mINFO[m] enrollment-api ..................................... [1;31mFAILURE[m [  0.884 s]
+[[1;34mINFO[m] enrollment-worker .................................. [1;33mSKIPPED[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  5.624 s
+[[1;34mINFO[m] Finished at: 2026-04-29T18:54:47+03:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m on project [36menrollment-api[m: [1;31mCompilation failure[m: Compilation failure: 
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/EnrollmentApplication.java:[5,53] package org.springframework.boot.autoconfigure.domain does not exist
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/EnrollmentApplication.java:[11,2] cannot find symbol
+[[1;31mERROR[m]   symbol: class EntityScan
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/controller/OpenEdxController.java:[4,39] cannot find symbol
+[[1;31mERROR[m]   symbol:   class OpenEdxService
+[[1;31mERROR[m]   location: package com.skillbox.enrollment.service
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/controller/OpenEdxController.java:[16,19] cannot find symbol
+[[1;31mERROR[m]   symbol:   class OpenEdxService
+[[1;31mERROR[m]   location: class com.skillbox.enrollment.controller.OpenEdxController
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/controller/OpenEdxController.java:[13,1] cannot find symbol
+[[1;31mERROR[m]   symbol:   class OpenEdxService
+[[1;31mERROR[m]   location: class com.skillbox.enrollment.controller.OpenEdxController
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[[1;31mERROR[m] 
+[[1;31mERROR[m] After correcting the problems, you can resume the build with the command
+[[1;31mERROR[m]   [1mmvn <args> -rf :enrollment-api[m

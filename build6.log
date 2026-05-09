@@ -1,0 +1,136 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mReactor Build Order:[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] enrollment-parent                                                  [pom]
+[[1;34mINFO[m] enrollment-common                                                  [jar]
+[[1;34mINFO[m] enrollment-api                                                     [jar]
+[[1;34mINFO[m] enrollment-worker                                                  [jar]
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-parent[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-parent 0.0.1-SNAPSHOT                          [1/4][m
+[[1;34mINFO[m] [1m--------------------------------[ pom ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-parent[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-common[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-common 0.0.1-SNAPSHOT                          [2/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-common/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/main/resources
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 11 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-common/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:testCompile[m [1m(default-testCompile)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.5.4:test[m [1m(default-test)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.2:jar[m [1m(default-jar)[m @ [36menrollment-common[0;1m ---[m
+[[1;34mINFO[m] Building jar: /home/aeshabb/ITMO/blps/lab2/enrollment-common/target/enrollment-common-0.0.1-SNAPSHOT.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--------------------< [0;36mcom.skillbox:enrollment-api[0;1m >---------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-api 0.0.1-SNAPSHOT                             [3/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-api/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 6 resources from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 24 source files with javac [debug parameters release 17] to target/classes
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/config/JmsConfig.java:[33,9] org.springframework.jms.support.converter.MappingJackson2MessageConverter in org.springframework.jms.support.converter has been deprecated and marked for removal
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/config/JmsConfig.java:[33,57] org.springframework.jms.support.converter.MappingJackson2MessageConverter in org.springframework.jms.support.converter has been deprecated and marked for removal
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/main/java/com/skillbox/enrollment/config/RedisConfig.java:[19,101] org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer in org.springframework.data.redis.serializer has been deprecated and marked for removal
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/aeshabb/ITMO/blps/lab2/enrollment-api/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:testCompile[m [1m(default-testCompile)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.5.4:test[m [1m(default-test)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.2:jar[m [1m(default-jar)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Building jar: /home/aeshabb/ITMO/blps/lab2/enrollment-api/target/enrollment-api-0.0.1-SNAPSHOT.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:4.0.3:repackage[m [1m(repackage)[m @ [36menrollment-api[0;1m ---[m
+[[1;34mINFO[m] Replacing main artifact /home/aeshabb/ITMO/blps/lab2/enrollment-api/target/enrollment-api-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[[1;34mINFO[m] The original artifact has been renamed to /home/aeshabb/ITMO/blps/lab2/enrollment-api/target/enrollment-api-0.0.1-SNAPSHOT.jar.original
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.skillbox:enrollment-worker[0;1m >-------------------[m
+[[1;34mINFO[m] [1mBuilding enrollment-worker 0.0.1-SNAPSHOT                          [4/4][m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36menrollment-worker[0;1m ---[m
+[[1;34mINFO[m] Deleting /home/aeshabb/ITMO/blps/lab2/enrollment-worker/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36menrollment-worker[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 0 resource from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36menrollment-worker[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 16 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;33mWARNING[m] COMPILATION WARNING : 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/config/JmsConfig.java:[43,9] org.springframework.jms.support.converter.MappingJackson2MessageConverter in org.springframework.jms.support.converter has been deprecated and marked for removal
+[[1;33mWARNING[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/config/JmsConfig.java:[43,57] org.springframework.jms.support.converter.MappingJackson2MessageConverter in org.springframework.jms.support.converter has been deprecated and marked for removal
+[[1;34mINFO[m] 2 warnings 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] COMPILATION ERROR : 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/CrmNotificationService.java:[36,25] incompatible types: try-with-resources not applicable to variable type
+    (jakarta.resource.cci.Connection cannot be converted to java.lang.AutoCloseable)
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/CrmNotificationService.java:[39,22] incompatible types: try-with-resources not applicable to variable type
+    (jakarta.resource.cci.Interaction cannot be converted to java.lang.AutoCloseable)
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[9,8] com.skillbox.enrollment.worker.jca.NotificationConnectionFactory is not abstract and does not override abstract method setReference(javax.naming.Reference) in jakarta.resource.Referenceable
+[[1;34mINFO[m] 3 errors 
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1mReactor Summary for enrollment-parent 0.0.1-SNAPSHOT:[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] enrollment-parent .................................. [1;32mSUCCESS[m [  0.158 s]
+[[1;34mINFO[m] enrollment-common .................................. [1;32mSUCCESS[m [  2.773 s]
+[[1;34mINFO[m] enrollment-api ..................................... [1;32mSUCCESS[m [  1.525 s]
+[[1;34mINFO[m] enrollment-worker .................................. [1;31mFAILURE[m [  0.517 s]
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  5.450 s
+[[1;34mINFO[m] Finished at: 2026-04-29T18:59:38+03:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m on project [36menrollment-worker[m: [1;31mCompilation failure[m: Compilation failure: 
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/CrmNotificationService.java:[36,25] incompatible types: try-with-resources not applicable to variable type
+[[1;31mERROR[m]     (jakarta.resource.cci.Connection cannot be converted to java.lang.AutoCloseable)
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/CrmNotificationService.java:[39,22] incompatible types: try-with-resources not applicable to variable type
+[[1;31mERROR[m]     (jakarta.resource.cci.Interaction cannot be converted to java.lang.AutoCloseable)
+[[1;31mERROR[m] /home/aeshabb/ITMO/blps/lab2/enrollment-worker/src/main/java/com/skillbox/enrollment/worker/jca/NotificationConnectionFactory.java:[9,8] com.skillbox.enrollment.worker.jca.NotificationConnectionFactory is not abstract and does not override abstract method setReference(javax.naming.Reference) in jakarta.resource.Referenceable
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m] 
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m] 
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[[1;31mERROR[m] 
+[[1;31mERROR[m] After correcting the problems, you can resume the build with the command
+[[1;31mERROR[m]   [1mmvn <args> -rf :enrollment-worker[m

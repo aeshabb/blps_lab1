@@ -43,4 +43,13 @@ public class NotificationConnectionFactory implements ConnectionFactory, Seriali
     @Override public RecordFactory getRecordFactory() throws ResourceException {
         throw new ResourceException("Not supported");
     }
+    private javax.naming.Reference reference;
+    @Override
+    public void setReference(javax.naming.Reference reference) {
+        this.reference = reference;
+    }
+    @Override
+    public javax.naming.Reference getReference() {
+        return reference;
+    }
 }

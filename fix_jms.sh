@@ -1,0 +1,3 @@
+sed -i 's/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/guest:guest@localhost:5672}/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/localhost:5672}\nrabbitmq.amqp.username=${RABBITMQ_USERNAME:guest}\nrabbitmq.amqp.password=${RABBITMQ_PASSWORD:guest}/g' enrollment-api/src/main/resources/application.properties
+
+sed -i 's/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/guest:guest@localhost:5672}/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/localhost:5672}\nrabbitmq.amqp.username=${RABBITMQ_USERNAME:guest}\nrabbitmq.amqp.password=${RABBITMQ_PASSWORD:guest}/g' enrollment-worker/src/main/resources/application.properties

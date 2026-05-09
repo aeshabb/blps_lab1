@@ -24,16 +24,25 @@ public class JmsConfig {
     private String amqpUrl;
 
     @Bean
-    public ConnectionFactory jmsConnectionFactory() {
-        return new JmsConnectionFactory(amqpUrl);
+    public ConnectionFactory jmsConnectionFactory() throws Exception {
+        java.net.URI uri = new java.net.URI(amqpUrl);
+        String userInfo = uri.getUserInfo();
+        String cleanUrl = new java.net.URI(uri.getScheme(), null, uri.getHost(), uri.getPort(), uri.getPath(), uri.getQuery(), uri.getFragment()).toString();
+        JmsConnectionFactory factory = new JmsConnectionFactory(cleanUrl);
+        if (userInfo != null) {
+            String[] parts = userInfo.split(":");
+            if (parts.length > 0) factory.setUsername(parts[0]);
+            if (parts.length > 1) factory.setPassword(parts[1]);
+        }
+        return factory;
     }
 
     @Bean
-    public MessageConverter jacksonJmsMessageConverter(ObjectMapper objectMapper) {
+    public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("_type");
-        converter.setObjectMapper(objectMapper);
+        converter.setObjectMapper(new ObjectMapper());
         return converter;
     }
 

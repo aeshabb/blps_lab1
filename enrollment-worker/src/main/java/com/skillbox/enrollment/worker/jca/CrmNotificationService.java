@@ -33,15 +33,33 @@ public class CrmNotificationService {
     }
 
     private void send(String userEmail, String courseId, String operation) {
-        try (Connection conn = crmConnectionFactory.getConnection()) {
+        Connection conn = null;
+        jakarta.resource.cci.Interaction interaction = null;
+        try {
+            conn = crmConnectionFactory.getConnection();
             var spec = new NotificationInteractionSpec(operation);
             var record = new NotificationRecord(userEmail, courseId, operation);
-            try (var interaction = conn.createInteraction()) {
-                interaction.execute(spec, record);
-            }
+            interaction = conn.createInteraction();
+            interaction.execute(spec, record);
             log.info("CRM notified via JCA: operation={}, email={}", operation, userEmail);
         } catch (ResourceException e) {
             log.error("JCA CRM notification failed: {}", e.getMessage());
+        } finally {
+            if (interaction != null) {
+                try {
+                    interaction.close();
+                } catch (Exception e) {
+                    log.error("Failed to close interaction: {}", e.getMessage());
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    log.error("Failed to close connection: {}", e.getMessage());
+                }
+            }
         }
     }
+
 }

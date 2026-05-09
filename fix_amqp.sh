@@ -1,0 +1,2 @@
+sed -i 's/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/localhost:5672}/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/localhost:5672?amqp.saslMechanisms=PLAIN}/g' enrollment-api/src/main/resources/application.properties
+sed -i 's/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/localhost:5672}/rabbitmq.amqp.url=${RABBITMQ_AMQP_URL:amqp:\/\/localhost:5672?amqp.saslMechanisms=PLAIN}/g' enrollment-worker/src/main/resources/application.properties

@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('displayStatus').innerText = data.status;
                 document.getElementById('displayAmount').innerText = tariff.price;
                 paymentLinkBtn.href = normalizePaymentLink(data.paymentLink);
+                startStatusPolling();
             })
             .catch(err => alert("Ошибка создания заявки: " + err.message));
         });
@@ -345,6 +346,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     const status = data.status;
                     document.getElementById('displayStatus').innerText = status;
+                    
+                    if (data.paymentLink && document.getElementById('paymentLinkBtn').href === window.location.href + '#') {
+                        document.getElementById('paymentLinkBtn').href = normalizePaymentLink(data.paymentLink);
+                    }
                     
                     if (status === 'ENROLLED' || status === 'PAYMENT_SUCCESS') {
                         clearInterval(interval);

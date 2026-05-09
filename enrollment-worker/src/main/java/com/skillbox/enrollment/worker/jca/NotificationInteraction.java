@@ -12,7 +12,7 @@ public class NotificationInteraction implements Interaction {
     }
 
     @Override
-    public boolean execute(InteractionSpec ispec, Record input, Record output) throws ResourceException {
+    public boolean execute(InteractionSpec ispec, jakarta.resource.cci.Record input, jakarta.resource.cci.Record output) throws ResourceException {
         if (!(input instanceof NotificationRecord rec)) {
             throw new ResourceException("Expected NotificationRecord");
         }
@@ -21,7 +21,7 @@ public class NotificationInteraction implements Interaction {
     }
 
     @Override
-    public Record execute(InteractionSpec ispec, Record input) throws ResourceException {
+    public jakarta.resource.cci.Record execute(InteractionSpec ispec, jakarta.resource.cci.Record input) throws ResourceException {
         execute(ispec, input, null);
         return null;
     }
